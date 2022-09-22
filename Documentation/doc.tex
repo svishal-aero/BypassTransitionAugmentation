@@ -1,0 +1,108 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in, driver=pdftex]{geometry}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{relsize}
+\usepackage{float}
+\usepackage{svg}
+\usepackage{pdflscape}
+%\usepackage{makecell}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\setlength\parindent{0pt}
+
+\title{A quick guide to running augmented models in Joe}
+\author{Vishal Srivastava}
+\date{\vspace{-2em}}
+
+\begin{document}
+
+\maketitle
+
+\section{File Descriptions}
+
+Here are the descriptions of the various files and folders in the run directory.
+\begin{itemize}
+    \item All individual case directories contain the following files and folders.
+          \begin{itemize}
+              \item \texttt{Joe.in} is the config file that contains details required by the solver to run the simulations like mesh/restart file name, fluid properties, numerical solvers, initial/boundary conditions etc.
+              \item Joe requires mesh files in the ASCII fluent format (\texttt{.msh} or \texttt{.cas} extensions). {\color[rgb]{0.7,0,0} Please note here that Joe only works with 3D mesh files. Also, implementing periodic boundary conditions is an ad-hoc and complex procedure and requires some preprocessing to generate a restart file with the periodic faces linked with each other.}
+              \item Solution files are written in a custom binary format and can be used to restart the simulations as well.
+              \item Joe can write tecplot binary files (\texttt{.plt}) to visualize the solutions. {\color[rgb]{0.7,0,0} Please note here that Joe runs into a bug and stops running when one chooses to write the visualization file and runs the executable in serial (on just one core).}
+              \item \texttt{gamma\_max\_params.dat} and \texttt{gamma\_sep\_params.dat} contain the parameters of the two augmentation functions. These are identical across all different case directories.
+          \end{itemize}
+    \item The \texttt{JOEfiles} directory contains the following files and folders
+          \begin{itemize}
+              \item \texttt{joe.cpp} is the main driver file that contains all the hook functions (briefly discussed later)
+              \item \texttt{TurbModel.h} contains the turbulence and transition models
+              \item The \texttt{LIFE} folder contains wrappers around augmentation function classes
+              \item \texttt{AUG\_gamma\_max.hpp} and \texttt{AUG\_gamma\_sep.hpp} files contain details of the augmentation function (like resolution in the feature-space) and the feature formulations for the two augmentation functions respectively. 
+              \item The \texttt{WallLinker} directory contains functions that identify the closest wall face to any cell in the domain and can communicate quantities to/from the identified face.
+          \end{itemize}
+\end{itemize}
+
+\section{The config file}
+Following are the standard inputs in the config file. Please note that a \# symbol is used to comment lines in the config file.
+\begin{itemize}
+    \item \texttt{P\_REF}, \texttt{T\_REF} and \texttt{RHO\_REF} are the reference gas quantities.
+    \item \texttt{U\_INITIAL} specifies the initial condition for the velocity in a simulation.
+    \item \texttt{MU\_MODE} refers to the viscosity model used for the computations. Valid options are \texttt{SUTHERLAND} and \texttt{POWERLAW}.
+    \item \texttt{GAMMA} refers to the ratio of specific heats of the gas.
+    \item \texttt{RESTART} requires the name of the mesh file or the solution file from where the simulation should continue.
+    \item \texttt{NSTEPS} refers to the number of flow solver iterations that will be carried out during the simulation.
+    \item \texttt{CHECK\_INTERVAL} refers to the number of flow iterations after which the r.m.s. values of the residuals will be displayed.
+    \item \texttt{WRITE\_RESTART} refers to the number of flow iterations after which restart files will be written. Note that while such restart files are named as \texttt{restart.<iteration>.out}, a final \texttt{restart.out} file is automatically written once the simulation is completed.
+    \item \texttt{INITIAL\_FLOWFIELD\_OUTPUT} decides whether a tecplot file will be written using the initial state values (initial conditions if a mesh file was provided, or previous state values if a restart file was provided).
+    \item \texttt{TIME\_INTEGRATION} specifies the pseudo time-stepping method being used to solve the steady RANS equations. It is recommended to use \texttt{BACKWARD\_EULER\_COUPLED}.
+    \item \texttt{CFL} specifies the base CFL number being used in the simulation
+    \item \texttt{CFL\_RAMP} specifies settings based on which CFL increases with the number of flow solver iterations.
+    \item Boundary conditions are specified by using the name of the boundary (as specified in the fluent mesh file) as the parameter name followed by the details of the boundary condition.
+    \item \texttt{kine\_INITIAL}, \texttt{omega\_INITIAL}, and \texttt{gammai\_INITIAL} specify the initial conditions for modeled turbulence kinetic energy, its specific dissipation and intermittency. {\color[rgb]{0.7,0,0} Please note that the intermittency variable in Joe is referred to as \texttt{gammai} and not \texttt{gamma}}
+    \item Dirichilet boundary conditions for turbulence scalars are specified as \texttt{<boundary-name>.<scalar-name>}. {\color[rgb]{0.7,0,0} If a boundary condition is not specified, it is assumed that the boundary condition is Neumann. Please note that all boundary conditions in Joe are first-order accurate, even though rest of the numerics are second-order accurate.}
+    \item \texttt{WRITE\_DATA} uses the sub-parameters \texttt{NAME}, \texttt{INTERVAL}, and \texttt{VARS} to control the name of the output visualization file, how often the visualization file is written, and what variables are written to these files. Joe ignores any variables that are specified but do not exist.
+\end{itemize}
+Following are the inputs in the config file relevant to the augmented model.
+\begin{itemize}
+    \item \texttt{FULLY\_TURBULENT} is used to run a simulation where the source term is set to zero in the intermittency transport equation
+    \item \texttt{USE\_FS} is used to indicate that the solver should use quantities from the freestream to be used in transition modeling.
+    \item The quantities are extracted from locations within a range specified as $\ell\pm\Delta\ell$. If more than one such freestream cells exist corresponding to a single wall location, an average of all such values is used. \texttt{DIST\_FS} refers to $\ell$ and \texttt{TOL\_FS} refers to $\Delta\ell$.
+    \item Finally, \texttt{SWITCH\_AUG\_AT} specifies the range within which the hierarchical augmentation is activated.
+\end{itemize}
+
+\section{Downloading and compiling Joe libraries (Linux only)}
+Perform the following steps to obtain the latest version of \texttt{joe\_lean} repository.\\
+
+\texttt{git clone https://github.com/svishal-aero/joe.git}
+
+\texttt{cd joe}
+
+\texttt{python install.py}\\
+
+Please ensure that $\sim$\texttt{/bin} is mentioned in the \texttt{PATH} environment variable.
+
+\section{Compiling the Joe executable}
+Within the \texttt{JOEfiles} directory, run the following.\\
+
+\texttt{joecxx joe.cpp -o joe}
+
+\section{Running a case}
+When starting from a mesh file, it is advisable to first construct global cell indices as follows.\\
+
+\texttt{mpirun -np 2 path/to/JOEfiles/joe --run 0} \\
+
+Otherwise (or following which) one can simply run a simulation as follows.\\
+
+\texttt{mpirun -np <\#-of-procs> path/to/JOEfiles/joe}\\
+
+For the compressor cascade cases, it is recommended to run a fully turbulent simulation first and then restart the transition simulation from the corresponding solution file.
+While this step is not necessary, sometimes the data-driven augmentation could produce a nan value when the initial conditions are used on certain geometries.
+The fully turbulent simulation helps condition the variable values in order to avoid this issue.
+
+\end{document}

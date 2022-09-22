@@ -1,0 +1,290 @@
+Iteration 0001 Running Direct...
+Job <537219> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0001 Running Adjoint...
+Job <537220> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0002 Running Direct...
+Job <537221> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0002 Running Adjoint...
+Job <537222> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537222> is being terminated
+DONE
+Iteration 0003 Running Direct...
+Job <537232> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0003 Running Adjoint...
+Job <537233> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0004 Running Direct...
+Job <537234> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0004 Running Adjoint...
+Job <537235> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0005 Running Direct...
+Job <537236> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0005 Running Adjoint...
+Job <537237> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537237> is being terminated
+DONE
+Iteration 0006 Running Direct...
+Job <537239> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0006 Running Adjoint...
+Job <537240> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537240> is being terminated
+DONE
+Iteration 0007 Running Direct...
+Job <537241> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0007 Running Adjoint...
+Job <537242> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0008 Running Direct...
+Job <537243> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0008 Running Adjoint...
+Job <537244> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537244> is being terminated
+DONE
+Iteration 0009 Running Direct...
+Job <537245> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0009 Running Adjoint...
+Job <537246> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0010 Running Direct...
+Job <537247> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0010 Running Adjoint...
+Job <537248> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0011 Running Direct...
+Job <537249> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0011 Running Adjoint...
+Job <537250> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537250> is being terminated
+DONE
+Iteration 0012 Running Direct...
+Job <537251> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0012 Running Adjoint...
+Job <537252> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537252> is being terminated
+DONE
+Iteration 0013 Running Direct...
+Job <537253> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0013 Running Adjoint...
+Job <537254> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537254> is being terminated
+DONE
+Iteration 0014 Running Direct...
+Job <537255> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0014 Running Adjoint...
+Job <537256> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537256> is being terminated
+DONE
+Iteration 0015 Running Direct...
+Job <537257> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0015 Running Adjoint...
+Job <537258> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537258> is being terminated
+DONE
+Iteration 0016 Running Direct...
+Job <537259> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0016 Running Adjoint...
+Job <537260> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0017 Running Direct...
+Job <537261> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0017 Running Adjoint...
+Job <537262> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0018 Running Direct...
+Job <537263> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0018 Running Adjoint...
+Job <537264> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0019 Running Direct...
+Job <537265> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0019 Running Adjoint...
+Job <537266> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537266> is being terminated
+DONE
+Iteration 0020 Running Direct...
+Job <537267> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0020 Running Adjoint...
+Job <537268> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537268> is being terminated
+DONE
+Iteration 0021 Running Direct...
+Job <537269> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0021 Running Adjoint...
+Job <537270> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537270> is being terminated
+DONE
+Iteration 0022 Running Direct...
+Job <537271> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0022 Running Adjoint...
+Job <537272> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537272> is being terminated
+DONE
+Iteration 0023 Running Direct...
+Job <537273> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0023 Running Adjoint...
+Job <537274> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537274> is being terminated
+DONE
+Iteration 0024 Running Direct...
+Job <537275> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0024 Running Adjoint...
+Job <537276> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537276> is being terminated
+DONE
+Iteration 0025 Running Direct...
+Job <537277> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0025 Running Adjoint...
+Job <537278> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537278> is being terminated
+DONE
+Iteration 0026 Running Direct...
+Job <537279> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0026 Running Adjoint...
+Job <537280> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537280> is being terminated
+DONE
+Iteration 0027 Running Direct...
+Job <537281> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0027 Running Adjoint...
+Job <537282> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0028 Running Direct...
+Job <537283> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0028 Running Adjoint...
+Job <537284> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537284> is being terminated
+DONE
+Iteration 0029 Running Direct...
+Job <537285> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0029 Running Adjoint...
+Job <537286> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537286> is being terminated
+DONE
+Iteration 0030 Running Direct...
+Job <537287> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0030 Running Adjoint...
+Job <537288> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0031 Running Direct...
+Job <537289> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0031 Running Adjoint...
+Job <537290> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537290> is being terminated
+DONE
+Iteration 0032 Running Direct...
+Job <537291> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0032 Running Adjoint...
+Job <537292> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... DONE
+Iteration 0033 Running Direct...
+Job <537293> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0033 Running Adjoint...
+Job <537294> is submitted to queue <normal>.
+Case "010" completed
+Deleting ADOLC files for case 010... DONE
+Aborting job for case 010... Job <537294> is being terminated
+DONE
+Iteration 0034 Running Direct...
+Job <537296> is submitted to queue <normal>.
+Case "010" completed
+Iteration 0034 Running Adjoint...
+Job <537297> is submitted to queue <normal>.

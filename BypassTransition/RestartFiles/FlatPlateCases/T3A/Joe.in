@@ -1,0 +1,76 @@
+################################
+#     GAS PROPERTIES
+# -----------------------------
+RHO_REF = 1.
+P_REF = 0.714285714285714
+T_REF = 0.714285714285714
+MU_MODE = POWERLAW
+MU_REF = 5.7692e-07
+MU_POWER_LAW = 0.0
+GAMMA = 1.4
+
+## SOLVER SETTINGS ############################################################
+
+#RESTART = mesh.msh
+RESTART = ./restart.out
+
+NSTEPS = 1000
+CHECK_INTERVAL = 1
+WRITE_RESTART = 1000
+
+TIME_INTEGRATION = BACKWARD_EULER_COUPLED
+LINEAR_SOLVER_NS = PETSC_GMRES
+LINEAR_SOLVER_NS_TRESHOLDS  MAX_ITER=30  ABS_RESID=1.0e-8  REL_RESID=1.0e-2
+LINEAR_SOLVER_SCALARS = PETSC_GMRES
+UNDER_RELAXATION = 0.8
+
+SPATIAL_SECOND_ORDER
+GRAD_RECONSTRUCTION SCHEME=GREENGAUSS  LIMITER=YES  EPS=0.01
+
+CFL = 100.0
+CFL_RAMP AFTER_ITER=100  INTERVAL_ITER=10  FACTOR_CFL=1.05  MAX_CFL=100.0
+
+## NAVIER-STOKES INITIAL & BOUNDARY CONDITIONS ################################
+
+U_INITIAL  = 0.2 0.0 0.0
+INLET      = CBC 0.2 0.0 0.0 0.714285714285714 0.714285714285714
+OUTLET     = CBC 0.2 0.0 0.0 0.714285714285714 0.714285714285714
+TOP        = CBC 0.2 0.0 0.0 0.714285714285714 0.714285714285714
+LEFT       = SYMMETRY
+RIGHT      = SYMMETRY
+FLATPLATE  = WALL
+FRONTPLATE = SYMMETRY
+
+## SCALAR INITIAL & BOUNDARY CONDITIONS #######################################
+
+kine_INITIAL     = 7.35e-05
+INLET.kine       = 7.35e-05
+TOP.kine         = 7.35e-05
+FLATPLATE.kine   = 0.
+
+omega_INITIAL    = 9.10004853359
+INLET.omega      = 9.10004853359
+TOP.omega        = 9.10004853359
+FLATPLATE.omega  = HOOK
+
+gammai_INITIAL   = 1.0
+INLET.gammai     = 1.0
+TOP.gammai       = 1.0
+
+USE_FS
+DIST_FS = 0.2
+TOL_FS = 0.02
+
+## PLOTTING ###################################################################
+
+WRITE_DATA FORMAT = TECPLOT NAME = fluid INTERVAL = 1000 GEOM = ALL VARS = RHO vel RHOE press temp muT muLam kine omega residField nuSA gammai ReThetaT ReThetaT_local
+
+## OBSERVABLES ################################################################
+
+REF_FILENAME = ./Cf.ref
+MARKER_NAMES = FLATPLATE
+MARKER_DATA_TOL = 1e-2
+CALCULATE_OBJECTIVE
+CASE_NAME = T3
+
+SWITCH_AUG_AT 1 2 #-0.05 1

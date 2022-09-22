@@ -1,0 +1,116 @@
+#TRANSFORM_MESH
+
+##################################################################
+#
+# Re (based on inlet velocity and blade chord) : 250,000
+# Blade chord (L) : 5 in. = 0.127 m (erroneous mesh: 5m)
+#
+#----------------------------------------------------------------
+#
+# INLET CONDITIONS (AS SPECIFIED BY UTRC)
+#-----------------------------------------
+# P_in         : 1 atm = 101325.0 Pa
+# T_in         : 288.15K
+# Umag         : 95 ft/s = 28.956 m/s
+# inflow angle : 45 deg
+# Tu_in        : 0.01
+# R_t          : 10.0
+#
+##################################################################
+
+
+#KOM_REALIZABLE
+
+################################
+#     GAS PROPERTIES
+# -----------------------------
+RHO_REF = 1.22497812621                   # P_in / R_gas / T_in
+VEL_REF = 28.956
+P_REF = 101325.0                          # P_in
+T_REF = 288.15                            # T_in
+U_INITIAL = 20.474983956 20.474983956 0.0 # Umag * {sqrt(2), sqrt(2), 0.0}  
+MU_MODE = SUTHERLAND
+MU_REF = 1.7283736E-5                     # mu_ref for correct L: 1.7283736E-5 (RHO_REF * Umag * L) / Re [Sutherland gives 1.789E-5 at T_in]
+MU_POWER_LAW = 0.0
+GAMMA = 1.4
+
+#RESTART = 1210.les
+#RESTART = NACA65-12-10.out
+RESTART = restart.out
+
+################################
+#      SOLVER SETTINGS
+# -----------------------------
+NSTEPS = 5000
+CHECK_INTERVAL = 1
+WRITE_RESTART = 5000
+
+INITIAL_FLOWFIELD_OUTPUT = YES
+
+TIME_INTEGRATION = BACKWARD_EULER_COUPLED  # implicit (backward) euler
+LINEAR_SOLVER_NS = PETSC_GMRES
+LINEAR_SOLVER_NS_TRESHOLDS  MAX_ITER=30  ABS_RESID=1.0e-8  REL_RESID=1.0e-2
+LINEAR_SOLVER_SCALARS = PETSC_GMRES  # or PETSC gmres
+UNDER_RELAXATION = 0.8
+
+#RELAX_gammai = 0.8
+
+SPATIAL_SECOND_ORDER
+GRAD_RECONSTRUCTION SCHEME=GREENGAUSS  LIMITER=YES  EPS=0.01
+
+CFL = 500.0
+CFL_RAMP AFTER_ITER=1000  INTERVAL_ITER=10  FACTOR_CFL=1.05  MAX_CFL = 500.0
+
+#################################
+# BOUNDARY CONSITIONS
+
+# Inlet conditions specified by UTRC
+#--------------------------------------
+# Flow angle : 45 deg  =>  direction cosines = {sqrt(2), sqrt(2), 0.0}
+# P0_in      : 14.77057284 PSI
+# T0_in      : 519.4211206 Rankine
+
+inlet          = CBC_SUBSONIC_INLET 0.70710678118 0.70710678118 0.0 288.56728922222 101839.51481038
+
+# Outlet conditions specified by UTRC
+#-------------------------------------
+# p_bc       : 14.695946 PSI (101324.9 Pa) needed to increase to match inlet pressure and velocity magnitude (was still in the process yesterday, might not be perfect)
+#
+
+outlet         = CBC_SUBSONIC_OUTLET 101531.82358
+side1          = SYMMETRY
+side2          = SYMMETRY
+bladeupper     = WALL
+bladelower     = WALL
+
+#INITIAL_CONDITION_TURB = 0.1257674904 854.99985975 1.0 # omega for correct L: 854.99985975 k_in = (3/2)*(Umag * Tu_in)^2 omega_in = k_in / R_t / mu * RHO_REF
+
+kine_INITIAL = 0.1257674904
+omega_INITIAL = 854.99985975
+gammai_INITIAL = 1.0
+
+inlet.kine   = 0.1257674904
+inlet.omega  = 854.99985975
+inlet.gammai = 1.0
+
+bladeupper.kine   = 0.0
+bladeupper.omega  = HOOK
+
+bladelower.kine   = 0.0
+bladelower.omega  = HOOK
+
+WRITE_DATA FORMAT=TECPLOT NAME=fluid INTERVAL=5000 GEOM=ALL VARS= RHO vel RHOE press temp muT muLam kine omega residField nuSA gammai
+
+REF_FILENAME ./wallShearStress.ref
+MARKER_DATA_TOL 1e-5
+MARKER_NAMES bladeupper bladelower
+
+CALCULATE_OBJECTIVE
+LAMBDA_REG = 0.0
+CASE_NAME = NACA
+
+USE_FS
+DIST_FS = 0.005
+TOL_FS = 0.001
+
+SWITCH_AUG_AT -1 1
